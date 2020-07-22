@@ -1,0 +1,35 @@
+{
+  "version": "0.0.0-semantically-released",
+  "name": "oas-fastify",
+  "description": "OAS 3.x to Fastify routes automation",
+  "author": "Ahmad Nassri <email@ahmadnassri.com> (https://www.ahmadnassri.com)",
+  "homepage": "https://github.com/ahmadnassri/oas-fastify",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahmadnassri/node-oas-fastify.git"
+  },
+  "license": "MIT",
+  "main": "lib/index.js",
+  "keywords": [
+    "oas",
+    "fastify"
+  ],
+  "engines": {
+    "node": ">=6"
+  },
+  "files": [
+    "lib"
+  ],
+  "bugs": {
+    "url": "https://github.com/ahmadnassri/node-oas-fastify/issues"
+  },
+  "scripts": {
+    "test": "tap test --100 --coverage-report=lcov --no-browser"
+  },
+  "devDependencies": {
+    "tap": "^14.10.8"
+  },
+  "dependencies": {
+    "fastify-plugin": "^2.0.1"
+  }
+}
