@@ -9,10 +9,10 @@ OAS 3.x to Fastify routes automation
 [![release][release-img]][release-url]
 
 [license-url]: LICENSE
-[license-img]: https://badgen.net/github/license/ahmadnassri/node-oas-fastify.svg?logo=circleci
+[license-img]: https://badgen.net/github/license/ahmadnassri/node-oas-fastify
 
 [npm-url]: https://www.npmjs.com/package/oas-fastify
-[npm-img]: https://badgen.net/npm/v/oas-fastify.svg?logo=npm
+[npm-img]: https://badgen.net/npm/v/oas-fastify
 
 [super-linter-url]: https://github.com/ahmadnassri/node-oas-fastify/actions?query=workflow%3Asuper-linter
 [super-linter-img]: https://github.com/ahmadnassri/node-oas-fastify/workflows/super-linter/badge.svg
