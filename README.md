@@ -35,7 +35,7 @@ const handler = {
   createPets: () => { ... }
   showPetById: () => { ... }
 }
- 
+
 fastify.register(require('oas-fastify'), { spec, handler }) 
 ```
 
@@ -63,7 +63,7 @@ const spec = {
 const handler = {
   listPets: function (request, reply, fastify) {
     // fastify instance passed in for convenience
-    
+
     reply.send({ hello: 'world' })
   }
 }
