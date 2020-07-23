@@ -1,4 +1,4 @@
-const convert = require('../lib/convert-path')
+const convert = require('../lib/helpers/convert-path')
 const { test } = require('tap')
 
 test('convert paths', assert => {

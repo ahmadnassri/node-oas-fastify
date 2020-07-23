@@ -11,13 +11,13 @@ test('oas-to-fastify', assert => {
   const result = []
 
   // fastify mock
-  fastify = {
-    addSchema: (spec) => schema = spec,
+  const fastify = {
+    addSchema: (spec) => (schema = spec),
     route: (route) => result.push(route)
   }
 
   // handler mock
-  handler = {
+  const handler = {
     listPets: 'listPets',
     createPets: 'createPets',
     showPetById: 'showPetById'
