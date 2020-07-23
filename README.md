@@ -61,7 +61,9 @@ const spec = {
 }
 
 const handler = {
-  listPets: function (request, reply) {
+  listPets: function (request, reply, fastify) {
+    // fastify instance passed in for convenience
+    
     reply.send({ hello: 'world' })
   }
 }

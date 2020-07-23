@@ -25,6 +25,6 @@ test('oas-to-fastify', assert => {
 
   plugin(fastify, { spec: openAPISpec, handler }, () => {})
 
-  assert.deepEqual(result, fastifySpec)
+  assert.match(result, fastifySpec)
   assert.strictSame(openAPISpec, schema)
 })

@@ -1,55 +1,55 @@
 module.exports = [{
-  url: "/pets",
-  method: "GET",
+  url: '/pets',
+  method: 'GET',
   schema: {
     params: undefined,
     query: {
-      type: "object",
+      type: 'object',
       required: [],
       properties: {
         limit: {
-          type: "integer",
-          format: "int32"
+          type: 'integer',
+          format: 'int32'
         }
       }
     },
     response: {
       200: {
-        "$ref": "#/components/schemas/Pets"
+        $ref: '#/components/schemas/Pets'
       }
     }
   },
-  handler: 'listPets'
+  handler: Function
 },
 {
-  url: "/pets",
-  method: "POST",
+  url: '/pets',
+  method: 'POST',
   schema: {
     params: undefined,
     query: undefined,
     response: {}
   },
-  handler: 'createPets'
+  handler: Function
 },
 {
-  url: "/pets/:petId",
-  method: "GET",
+  url: '/pets/:petId',
+  method: 'GET',
   schema: {
     query: undefined,
     params: {
-      type: "object",
-      required: ["petId"],
+      type: 'object',
+      required: ['petId'],
       properties: {
         petId: {
-          type: "string"
+          type: 'string'
         }
       }
     },
     response: {
       200: {
-        "$ref": "#/components/schemas/Pet"
+        $ref: '#/components/schemas/Pet'
       }
     }
   },
-  handler: 'showPetById'
+  handler: Function
 }]
