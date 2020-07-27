@@ -27,6 +27,22 @@ module.exports = [{
   schema: {
     params: undefined,
     query: undefined,
+    body: {
+      type: 'object',
+      required: ['email', 'username', 'password'],
+      properties: {
+        email: {
+          type: 'string',
+          format: 'email'
+        },
+        username: {
+          type: 'string'
+        },
+        password: {
+          type: 'string'
+        }
+      }
+    },
     response: {}
   },
   handler: Function
