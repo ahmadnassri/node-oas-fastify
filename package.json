@@ -30,6 +30,6 @@
     "tap": "^14.10.8"
   },
   "dependencies": {
-    "fastify-plugin": "^2.0.2"
+    "fastify-plugin": "^2.0.3"
   }
 }
