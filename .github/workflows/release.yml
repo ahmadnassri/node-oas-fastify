@@ -40,7 +40,7 @@ jobs:
 
       # run test
       - run: npm ci
-      - run: npm run test
+      - run: npm run test:100
 
   release:
     needs: test

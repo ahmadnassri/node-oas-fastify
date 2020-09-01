@@ -24,7 +24,9 @@
     "url": "https://github.com/ahmadnassri/node-oas-fastify/issues"
   },
   "scripts": {
-    "test": "tap test --100 --coverage-report=lcov --no-browser"
+    "test": "tap --no-coverage",
+    "test:watch": "tap --watch",
+    "test:100": "tap test --100 --color --coverage-report=lcov --no-browser"
   },
   "devDependencies": {
     "tap": "^14.10.8"
