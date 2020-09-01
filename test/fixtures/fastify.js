@@ -27,6 +27,15 @@ module.exports = [{
   schema: {
     params: undefined,
     query: undefined,
+    headers: {
+      type: 'object',
+      required: ['content-type'],
+      properties: {
+        'content-type': {
+          const: 'x-www-form-urlencoded'
+        }
+      }
+    },
     body: {
       type: 'object',
       required: ['email', 'username', 'password'],
