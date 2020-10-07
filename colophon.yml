@@ -1,0 +1,8 @@
+version: 2.0
+
+id: oas-fastify
+
+about:
+  title: OAS to Fastify Plugin
+  description: OAS 3.x to Fastify routes automation
+  repository: ahmadnassri/node-oas-fastify

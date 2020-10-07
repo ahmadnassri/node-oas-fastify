@@ -8,24 +8,9 @@ OAS 3.x to Fastify routes automation
 [![test][test-img]][test-url]
 [![release][release-img]][release-url]
 
-[license-url]: LICENSE
-[license-img]: https://badgen.net/github/license/ahmadnassri/node-oas-fastify
-
-[npm-url]: https://www.npmjs.com/package/oas-fastify
-[npm-img]: https://badgen.net/npm/v/oas-fastify
-
-[super-linter-url]: https://github.com/ahmadnassri/node-oas-fastify/actions?query=workflow%3Asuper-linter
-[super-linter-img]: https://github.com/ahmadnassri/node-oas-fastify/workflows/super-linter/badge.svg
-
-[test-url]: https://github.com/ahmadnassri/node-oas-fastify/actions?query=workflow%3Atest
-[test-img]: https://github.com/ahmadnassri/node-oas-fastify/workflows/test/badge.svg
-
-[release-url]: https://github.com/ahmadnassri/node-oas-fastify/actions?query=workflow%3Arelease
-[release-img]: https://github.com/ahmadnassri/node-oas-fastify/workflows/release/badge.svg
-
 ## Usage
 
-```js
+``` js
 const fastify = require('fastify')()
 const spec = require('./petstore.json')
 
@@ -43,12 +28,16 @@ fastify.register(require('oas-fastify'), { spec, handler })
 
 The plugin accepts an `options` object with the following properties:
 
-- **`spec`**: a valid [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification/) **JSON** object
-- **`handler`**: an object with properties that map to the spec's `operationId` names, with the values as functions that will handle the request
+  - **`spec`**: a valid [OpenAPI
+    Specification](https://github.com/OAI/OpenAPI-Specification/)
+    **JSON** object
+  - **`handler`**: an object with properties that map to the spec's
+    `operationId` names, with the values as functions that will handle
+    the request
 
 ###### Example
 
-```js
+``` js
 const spec = {
   "paths": {
     "/pets": {
@@ -68,3 +57,22 @@ const handler = {
   }
 }
 ```
+
+----
+> Author: [Ahmad Nassri](https://www.ahmadnassri.com/) &bull;
+> Twitter: [@AhmadNassri](https://twitter.com/AhmadNassri)
+
+[license-url]: LICENSE
+[license-img]: https://badgen.net/github/license/ahmadnassri/node-oas-fastify
+
+[npm-url]: https://www.npmjs.com/package/oas-fastify
+[npm-img]: https://badgen.net/npm/v/oas-fastify
+
+[super-linter-url]: https://github.com/ahmadnassri/node-oas-fastify/actions?query=workflow%3Asuper-linter
+[super-linter-img]: https://github.com/ahmadnassri/node-oas-fastify/workflows/super-linter/badge.svg
+
+[test-url]: https://github.com/ahmadnassri/node-oas-fastify/actions?query=workflow%3Atest
+[test-img]: https://github.com/ahmadnassri/node-oas-fastify/workflows/test/badge.svg
+
+[release-url]: https://github.com/ahmadnassri/node-oas-fastify/actions?query=workflow%3Arelease
+[release-img]: https://github.com/ahmadnassri/node-oas-fastify/workflows/release/badge.svg
