@@ -1,43 +1,39 @@
 name: test
 
-on:
-  push:
-    branches-ignore:
-      - master
+on: push
+
+env:
+  NODE_ENV: test
 
 jobs:
-  dependencies:
+  audit:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
       - uses: actions/setup-node@v2.1.1
-
-      # run checks
+      - uses: actions/checkout@v2
       - run: npm audit --audit-level=moderate
 
   test:
-    needs: dependencies
+    needs: audit
 
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        node-version: [10, 12, 13, 14]
+        node-version: [12, 13, 14]
 
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v2
-
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: client-${{ hashFiles('**/package-lock.json') }}
-
       - uses: actions/setup-node@v2.1.1
         with:
           node-version: ${{ matrix.node-version }}
 
-      # run test
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ matrix.os }}-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
+
       - run: npm ci
-      - run: npm run test:100
+      - run: npm run test:ci
