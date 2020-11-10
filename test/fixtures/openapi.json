@@ -105,7 +105,17 @@
               }
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-API-SECRET",
+            "required": true
+          }
+        ]
       }
     },
     "/pets/{petId}": {

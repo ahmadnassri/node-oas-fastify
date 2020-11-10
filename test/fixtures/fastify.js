@@ -29,10 +29,13 @@ module.exports = [{
     query: undefined,
     headers: {
       type: 'object',
-      required: ['content-type'],
+      required: ['X-API-SECRET', 'content-type'],
       properties: {
         'content-type': {
           const: 'x-www-form-urlencoded'
+        },
+        'X-API-SECRET': {
+          type: 'string'
         }
       }
     },
