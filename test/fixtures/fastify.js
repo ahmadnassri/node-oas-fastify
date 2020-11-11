@@ -2,7 +2,11 @@ module.exports = [{
   url: '/pets',
   method: 'GET',
   schema: {
-    params: undefined,
+    params: {
+      type: 'object',
+      required: [],
+      properties: {}
+    },
     query: {
       type: 'object',
       required: [],
@@ -25,8 +29,16 @@ module.exports = [{
   url: '/pets',
   method: 'POST',
   schema: {
-    params: undefined,
-    query: undefined,
+    params: {
+      type: 'object',
+      required: [],
+      properties: {}
+    },
+    query: {
+      type: 'object',
+      required: [],
+      properties: {}
+    },
     headers: {
       type: 'object',
       required: ['X-API-SECRET', 'content-type'],
@@ -63,7 +75,11 @@ module.exports = [{
   url: '/pets/:petId',
   method: 'GET',
   schema: {
-    query: undefined,
+    query: {
+      type: 'object',
+      required: [],
+      properties: {}
+    },
     params: {
       type: 'object',
       required: ['petId'],

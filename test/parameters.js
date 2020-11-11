@@ -2,12 +2,18 @@ const { test } = require('tap')
 
 const parameters = require('../lib/helpers/parameters')
 
+const defaultSchema = {
+  type: 'object',
+  required: [],
+  properties: {}
+}
+
 test('params: only accept arrays', assert => {
   assert.plan(3)
 
-  assert.type(parameters({}, 'query'), undefined)
-  assert.type(parameters(null, 'query'), undefined)
-  assert.type(parameters(undefined, 'query'), undefined)
+  assert.type(parameters({}, 'query'), Object)
+  assert.type(parameters(null, 'query'), Object)
+  assert.type(parameters(undefined, 'query'), Object)
 })
 
 test('params: convert to schema', assert => {
@@ -23,7 +29,7 @@ test('params: convert to schema', assert => {
     }
   }]
 
-  assert.strictSame(parameters(fixture, 'path'), undefined)
+  assert.strictSame(parameters(fixture, 'path'), defaultSchema)
   assert.strictSame(parameters(fixture, 'query'), {
     type: 'object',
     required: [],
