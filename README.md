@@ -29,7 +29,7 @@ fastify.register(require('oas-fastify'), { spec, handler })
 <details>
   <summary>This package does not support OAS Yaml format, but you can easily convert to JSON before calling `oas-fastify`</summary>
 
-###### using [`js-yaml`](https://www.npmjs.com/package/js-yaml)
+###### using [`js-yaml`][]
 
 ``` js
 const yaml = require('js-yaml')
@@ -41,7 +41,7 @@ const spec = yaml.safeLoad(fs.readFileSync('openapi.yml', 'utf8'))
 fastify.register(require('oas-fastify'), { spec, handler }) 
 ```
 
-###### using [`apidevtools/swagger-cli`](https://www.npmjs.com/package/@apidevtools/swagger-cli)
+###### using [`apidevtools/swagger-cli`][]
 
 ``` bash
 npx apidevtools/swagger-cli bundle spec/openapi.yml --outfile spec.json
@@ -53,7 +53,7 @@ npx apidevtools/swagger-cli bundle spec/openapi.yml --outfile spec.json
 
 The plugin accepts an `options` object with the following properties:
 
--   **`spec`**: a valid [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification/) **JSON** object
+-   **`spec`**: a valid [OpenAPI Specification][] **JSON** object
 -   **`handler`**: an object with properties that map to the spec's `operationId` names, with the values as functions that will handle the request
 
 ###### Example
@@ -78,6 +78,10 @@ const handler = {
   }
 }
 ```
+
+  [`js-yaml`]: https://www.npmjs.com/package/js-yaml
+  [`apidevtools/swagger-cli`]: https://www.npmjs.com/package/@apidevtools/swagger-cli
+  [OpenAPI Specification]: https://github.com/OAI/OpenAPI-Specification/
 
 ----
 > Author: [Ahmad Nassri](https://www.ahmadnassri.com/) &bull;
