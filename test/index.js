@@ -21,7 +21,7 @@ test('oas-to-fastify', assert => {
 
   plugin(fastify, { spec: openAPISpec, handler: {} }, () => {})
 
-  // replace handler Placeholder with Function for comparision
+  // replace handler Placeholder with Function for comparison
   const fastifySpecWithFunc = fastifySpec.map(route => ({ ...route, handler: Function }))
 
   assert.match(result, fastifySpecWithFunc)
