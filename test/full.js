@@ -1,4 +1,4 @@
-const plugin = require('../lib/')
+const plugin = require('../lib')
 const { test } = require('tap')
 
 const openAPISpec = require('./fixtures/openapi.json')
