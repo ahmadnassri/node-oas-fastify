@@ -2,131 +2,160 @@ const { test } = require('tap')
 
 const security = require('../lib/helpers/security')
 
+const securitySchemes = {
+  httpAuth: {
+    type: 'http'
+  },
+
+  headerAuth: {
+    type: 'apiKey',
+    in: 'header',
+    name: 'X-API-Key'
+  },
+
+  queryAuth: {
+    type: 'apiKey',
+    in: 'query',
+    name: 'X-API-Key'
+  },
+
+  cookieAuth: {
+    type: 'apiKey',
+    in: 'cookie',
+    name: 'SessionID'
+  }
+}
 test('security: only accept arrays', assert => {
   assert.plan(3)
 
-  const defaultSchema = {
-    type: 'object',
-    required: [],
-    properties: {}
-  }
-
-  assert.type(security(defaultSchema, 'header', {}, []), Object)
-  assert.type(security(defaultSchema, 'header', undefined, []), Object)
-  assert.type(security(defaultSchema, 'header', undefined, {}), Object)
+  assert.notOk(security(null, {}, []))
+  assert.notOk(security(null, undefined, []))
+  assert.notOk(security(null, undefined, {}))
 })
 
-test('security: only accept header and query type', assert => {
-  assert.plan(2)
+test('security: type=http ', assert => {
+  assert.plan(1)
 
-  const defaultSchema = {
-    type: 'object',
-    required: [],
-    properties: {}
-  }
-
-  const securitySchemes = {
-    Header: {
-      type: 'http'
+  const fastifyRoute = {
+    schema: {
+      query: {},
+      headers: {
+        type: 'object',
+        required: [],
+        properties: {}
+      }
     }
   }
-  const methodSecurity = [
-    { Header: {} }
-  ]
 
-  assert.type(security(defaultSchema, 'path', securitySchemes, methodSecurity), Object)
-  assert.strictSame(security(defaultSchema, 'path', securitySchemes, methodSecurity), defaultSchema)
-})
+  security(fastifyRoute, securitySchemes, [{ httpAuth: {} }])
 
-test('security: convert to schema header for http', assert => {
-  assert.plan(2)
-
-  const defaultSchema = {
-    type: 'object',
-    required: [],
-    properties: {}
-  }
-
-  const securitySchemes = {
-    Header: {
-      type: 'http'
-    }
-  }
-  const methodSecurity = [
-    { Header: {} }
-  ]
-
-  assert.strictSame(security(defaultSchema, 'query', securitySchemes, methodSecurity), defaultSchema)
-  assert.strictSame(security(defaultSchema, 'header', securitySchemes, methodSecurity), {
-    type: 'object',
-    required: ['authorization'],
-    properties: {
-      authorization: {
-        type: 'string'
+  assert.strictSame(fastifyRoute, {
+    schema: {
+      query: {},
+      headers: {
+        type: 'object',
+        required: ['authorization'],
+        properties: {
+          authorization: {
+            type: 'string'
+          }
+        }
       }
     }
   })
 })
 
-test('security: convert to schema header for apiKey', assert => {
-  assert.plan(2)
+test('security: type=apiKey in=header ', assert => {
+  assert.plan(1)
 
-  const defaultSchema = {
-    type: 'object',
-    required: [],
-    properties: {}
-  }
-
-  const securitySchemes = {
-    Header: {
-      type: 'apiKey',
-      in: 'header',
-      name: 'HEADER-API-KEY'
+  const fastifyRoute = {
+    schema: {
+      query: {},
+      headers: {
+        type: 'object',
+        required: [],
+        properties: {}
+      }
     }
   }
-  const methodSecurity = [
-    { Header: {} }
-  ]
 
-  assert.strictSame(security(defaultSchema, 'query', securitySchemes, methodSecurity), defaultSchema)
-  assert.strictSame(security(defaultSchema, 'header', securitySchemes, methodSecurity), {
-    type: 'object',
-    required: ['header-api-key'],
-    properties: {
-      'header-api-key': {
-        type: 'string'
+  security(fastifyRoute, securitySchemes, [{ headerAuth: {} }])
+
+  assert.strictSame(fastifyRoute, {
+    schema: {
+      query: {},
+      headers: {
+        type: 'object',
+        required: ['X-API-Key'],
+        properties: {
+          'X-API-Key': {
+            type: 'string'
+          }
+        }
       }
     }
   })
 })
 
-test('security: convert to schema query for apiKey', assert => {
-  assert.plan(2)
+test('security: type=apiKey in=query ', assert => {
+  assert.plan(1)
 
-  const defaultSchema = {
-    type: 'object',
-    required: [],
-    properties: {}
-  }
-
-  const securitySchemes = {
-    Header: {
-      type: 'apiKey',
-      in: 'query',
-      name: 'HEADER-API-KEY'
+  const fastifyRoute = {
+    schema: {
+      query: {
+        type: 'object',
+        required: [],
+        properties: {}
+      },
+      headers: {}
     }
   }
-  const methodSecurity = [
-    { Header: {} }
-  ]
 
-  assert.strictSame(security(defaultSchema, 'header', securitySchemes, methodSecurity), defaultSchema)
-  assert.strictSame(security(defaultSchema, 'query', securitySchemes, methodSecurity), {
-    type: 'object',
-    required: ['header-api-key'],
-    properties: {
-      'header-api-key': {
-        type: 'string'
+  security(fastifyRoute, securitySchemes, [{ queryAuth: {} }])
+
+  assert.strictSame(fastifyRoute, {
+    schema: {
+      headers: {},
+      query: {
+        type: 'object',
+        required: ['X-API-Key'],
+        properties: {
+          'X-API-Key': {
+            type: 'string'
+          }
+        }
+      }
+    }
+  })
+})
+
+test('security: type=apiKey in=cookie ', assert => {
+  assert.plan(1)
+
+  const fastifyRoute = {
+    schema: {
+      query: {},
+      headers: {
+        type: 'object',
+        required: [],
+        properties: {}
+      }
+    }
+  }
+
+  security(fastifyRoute, securitySchemes, [{ cookieAuth: {} }])
+
+  assert.strictSame(fastifyRoute, {
+    schema: {
+      query: {},
+      headers: {
+        type: 'object',
+        required: ['Set-Cookie'],
+        properties: {
+          'Set-Cookie': {
+            type: 'string'
+          }
+        }
       }
     }
   })
@@ -135,29 +164,65 @@ test('security: convert to schema query for apiKey', assert => {
 test('security: ignore missing security types', assert => {
   assert.plan(1)
 
-  const defaultSchema = {
-    type: 'object',
-    required: [],
-    properties: {}
-  }
-
-  const securitySchemes = {
-    Header: {
-      type: 'apiKey',
-      in: 'query',
-      name: 'HEADER-API-KEY'
+  const fastifyRoute = {
+    schema: {
+      query: {},
+      headers: {}
     }
   }
-  const methodSecurity = [
-    { Header: {}, Missing: {} }
-  ]
 
-  assert.strictSame(security(defaultSchema, 'query', securitySchemes, methodSecurity), {
-    type: 'object',
-    required: ['header-api-key'],
-    properties: {
-      'header-api-key': {
-        type: 'string'
+  security(fastifyRoute, securitySchemes, [{ Header: {}, Missing: {} }])
+
+  assert.strictSame(fastifyRoute, {
+    schema: {
+      query: {},
+      headers: {}
+    }
+  })
+})
+
+test('security: multiple ', assert => {
+  assert.plan(1)
+
+  const fastifyRoute = {
+    schema: {
+      query: {
+        type: 'object',
+        required: [],
+        properties: {}
+      },
+      headers: {
+        type: 'object',
+        required: [],
+        properties: {}
+      }
+    }
+  }
+
+  security(fastifyRoute, securitySchemes, [{ httpAuth: {}, headerAuth: {}, queryAuth: {} }])
+
+  assert.strictSame(fastifyRoute, {
+    schema: {
+      query: {
+        type: 'object',
+        required: ['X-API-Key'],
+        properties: {
+          'X-API-Key': {
+            type: 'string'
+          }
+        }
+      },
+      headers: {
+        type: 'object',
+        required: ['authorization', 'X-API-Key'],
+        properties: {
+          authorization: {
+            type: 'string'
+          },
+          'X-API-Key': {
+            type: 'string'
+          }
+        }
       }
     }
   })

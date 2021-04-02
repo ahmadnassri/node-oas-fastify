@@ -2,10 +2,10 @@ const plugin = require('../lib/')
 const { test } = require('tap')
 
 const openAPISpec = require('./fixtures/openapi.json')
-const fastifySpec = require('./fixtures/fastify')
+const fastifySpec = require('./fixtures/fastify.json')
 
 const openAPISpecSecurity = require('./fixtures/openapi-with-security.json')
-const fastifySpecSecurity = require('./fixtures/fastify-with-security')
+const fastifySpecSecurity = require('./fixtures/fastify-with-security.json')
 
 test('oas-to-fastify', assert => {
   assert.plan(2)
@@ -19,16 +19,12 @@ test('oas-to-fastify', assert => {
     route: (route) => result.push(route)
   }
 
-  // handler mock
-  const handler = {
-    listPets: 'listPets',
-    createPets: 'createPets',
-    showPetById: 'showPetById'
-  }
+  plugin(fastify, { spec: openAPISpec, handler: {} }, () => {})
 
-  plugin(fastify, { spec: openAPISpec, handler }, () => {})
+  // replace handler Placeholder with Function for comparision
+  const fastifySpecWithFunc = fastifySpec.map(route => ({ ...route, handler: Function }))
 
-  assert.match(result, fastifySpec)
+  assert.match(result, fastifySpecWithFunc)
   assert.strictSame(openAPISpec, schema)
 })
 
@@ -45,11 +41,7 @@ test('oas-to-fastify with security', assert => {
   }
 
   // handler mock
-  const handler = {
-    listPets: 'listPets',
-    createPets: 'createPets',
-    showPetById: 'showPetById'
-  }
+  const handler = {}
 
   plugin(fastify, { spec: openAPISpecSecurity, handler }, () => {})
 
