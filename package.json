@@ -9,8 +9,8 @@
     "url": "https://github.com/ahmadnassri/node-oas-fastify.git"
   },
   "funding": {
-    "type" : "individual",
-    "url" : "https://github.com/sponsors/ahmadnassri"
+    "type": "individual",
+    "url": "https://github.com/sponsors/ahmadnassri"
   },
   "license": "MIT",
   "main": "lib/index.js",
@@ -25,12 +25,13 @@
     "url": "https://github.com/ahmadnassri/node-oas-fastify/issues"
   },
   "scripts": {
-    "test": "tap test --no-esm --no-coverage",
-    "test:watch": "tap test --no-esm --watch",
-    "test:ci": "tap test --no-esm --100 --color --coverage-report=lcov --no-browser"
+    "test": "tap test --no-coverage",
+    "test:watch": "tap test --watch",
+    "test:ci": "tap test --100",
+    "test:report": "opener coverage/lcov-report/index.html"
   },
   "devDependencies": {
-    "tap": "^14.10.8"
+    "tap": "^15.0.1"
   },
   "dependencies": {
     "fastify-plugin": "^3.0.0"
