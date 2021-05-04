@@ -3,7 +3,7 @@
   "name": "oas-fastify",
   "description": "OAS 3.x to Fastify routes automation",
   "author": "Ahmad Nassri <email@ahmadnassri.com> (https://www.ahmadnassri.com)",
-  "homepage": "https://github.com/ahmadnassri/oas-fastify",
+  "homepage": "https://github.com/ahmadnassri/node-oas-fastify",
   "repository": {
     "type": "git",
     "url": "https://github.com/ahmadnassri/node-oas-fastify.git"
