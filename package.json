@@ -1,7 +1,7 @@
 {
   "version": "0.0.0-semantically-released",
   "name": "oas-fastify",
-  "description": "OAS 3.x to Fastify routes automation",
+  "description": "OAS 4.x to Fastify routes automation",
   "author": "Ahmad Nassri <email@ahmadnassri.com> (https://www.ahmadnassri.com)",
   "homepage": "https://github.com/ahmadnassri/node-oas-fastify",
   "repository": {
@@ -34,6 +34,10 @@
     "tap": "^16.3.0"
   },
   "dependencies": {
-    "fastify-plugin": "^4.0.0"
+    "@openapi-contrib/openapi-schema-to-json-schema": "^3.2.0",
+    "fastify-plugin": "^4.3.0"
+  },
+  "engines": {
+    "node": ">= 14.x.x"
   }
 }
