@@ -1,4 +1,5 @@
-const { test } = require('tap')
+const test = require('node:test')
+const assert = require('node:assert')
 
 const parameters = require('../lib/helpers/parameters')
 
@@ -8,17 +9,13 @@ const defaultSchema = {
   properties: {}
 }
 
-test('params: only accept arrays', assert => {
-  assert.plan(3)
-
-  assert.type(parameters({}, 'query'), Object)
-  assert.type(parameters(null, 'query'), Object)
-  assert.type(parameters(undefined, 'query'), Object)
+test('params: only accept arrays', () => {
+  assert.equal(typeof parameters({}, 'query'), 'object')
+  assert.equal(typeof parameters(null, 'query'), 'object')
+  assert.equal(typeof parameters(undefined, 'query'), 'object')
 })
 
-test('params: convert to schema', assert => {
-  assert.plan(2)
-
+test('params: convert to schema', () => {
   const fixture = [{
     name: 'foo',
     in: 'query',
@@ -29,8 +26,8 @@ test('params: convert to schema', assert => {
     }
   }]
 
-  assert.strictSame(parameters(fixture, 'path'), defaultSchema)
-  assert.strictSame(parameters(fixture, 'query'), {
+  assert.deepEqual(parameters(fixture, 'path'), defaultSchema)
+  assert.deepEqual(parameters(fixture, 'query'), {
     type: 'object',
     required: [],
     properties: {
@@ -41,9 +38,7 @@ test('params: convert to schema', assert => {
   })
 })
 
-test('params: convert to schema', assert => {
-  assert.plan(1)
-
+test('params: convert to schema', () => {
   const fixture = [{
     name: 'foo',
     in: 'path',
@@ -54,7 +49,7 @@ test('params: convert to schema', assert => {
     }
   }]
 
-  assert.strictSame(parameters(fixture, 'path'), {
+  assert.deepEqual(parameters(fixture, 'path'), {
     type: 'object',
     required: ['foo'],
     properties: {

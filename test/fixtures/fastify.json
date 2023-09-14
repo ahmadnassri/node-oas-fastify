@@ -3,6 +3,11 @@
     "url":"/pets",
     "method":"GET",
     "schema":{
+      "headers": {
+        "properties": {},
+        "required": [],
+        "type": "object"
+      },
       "params":{
         "type":"object",
         "required":[],
@@ -23,8 +28,7 @@
           "$ref":"#/components/schemas/Pets"
         }
       }
-    },
-    "handler": "PLACEHOLDER"
+    }
   },
   {
     "url":"/pets",
@@ -76,8 +80,7 @@
         }
       },
       "response":{}
-    },
-    "handler": "PLACEHOLDER"
+    }
   },
   {
     "url":"/pets/:petId",
@@ -104,7 +107,6 @@
           "$ref":"#/components/schemas/Pet"
         }
       }
-    },
-    "handler": "PLACEHOLDER"
+    }
   }
 ]

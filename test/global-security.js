@@ -1,5 +1,7 @@
+const test = require('node:test')
+const assert = require('node:assert')
+
 const plugin = require('../lib')
-const { test } = require('tap')
 
 const fixtures = {
   oas: {
@@ -45,15 +47,24 @@ const fixtures = {
               type: 'string'
             }
           }
-        }
+        },
+        params: {
+          properties: {},
+          required: [],
+          type: 'object'
+        },
+        query: {
+          properties: {},
+          required: [],
+          type: 'object'
+        },
+        response: {}
       }
     }
   ]
 }
 
-test('global security', assert => {
-  assert.plan(2)
-
+test('global security', () => {
   let schema
   const result = []
 
@@ -63,8 +74,12 @@ test('global security', assert => {
     route: (route) => result.push(route)
   }
 
+
   plugin(fastify, { spec: fixtures.oas, handler: {} }, () => {})
 
-  assert.match(result, fixtures.fastify)
-  assert.strictSame(fixtures.oas, schema)
+  // remove handler for test with deepEqual
+  delete result[0].handler
+
+  assert.deepEqual(result, fixtures.fastify)
+  assert.strictEqual(fixtures.oas, schema)
 })

@@ -13,7 +13,18 @@
             "type":"string"
           }
         }
-      }
+      },
+      "params": {
+        "properties": {},
+        "required": [],
+        "type": "object"
+      },
+      "query": {
+        "properties": {},
+        "required": [],
+        "type": "object"
+      },
+      "response": {}
     }
   },
   {
@@ -30,7 +41,18 @@
             "type":"string"
           }
         }
-      }
+      },
+      "params": {
+        "properties": {},
+        "required": [],
+        "type": "object"
+      },
+      "query": {
+        "properties": {},
+        "required": [],
+        "type": "object"
+      },
+      "response": {}
     }
   },
   {
@@ -47,7 +69,18 @@
             "type":"string"
           }
         }
-      }
+      },
+      "params": {
+        "properties": {},
+        "required": [],
+        "type": "object"
+      },
+      "headers": {
+        "properties": {},
+        "required": [],
+        "type": "object"
+      },
+      "response": {}
     }
   },
   {
@@ -64,7 +97,18 @@
             "type":"string"
           }
         }
-      }
+      },
+      "params": {
+        "properties": {},
+        "required": [],
+        "type": "object"
+      },
+      "query": {
+        "properties": {},
+        "required": [],
+        "type": "object"
+      },
+      "response": {}
     }
   }
 ]

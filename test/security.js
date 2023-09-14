@@ -1,4 +1,5 @@
-const { test } = require('tap')
+const test = require('node:test')
+const assert = require('node:assert')
 
 const security = require('../lib/helpers/security')
 
@@ -25,17 +26,13 @@ const securitySchemes = {
     name: 'SessionID'
   }
 }
-test('security: only accept arrays', assert => {
-  assert.plan(3)
-
-  assert.notOk(security(null, {}, []))
-  assert.notOk(security(null, undefined, []))
-  assert.notOk(security(null, undefined, {}))
+test('security: only accept arrays', () => {
+  assert.ok(!security(null, {}, []))
+  assert.ok(!security(null, undefined, []))
+  assert.ok(!security(null, undefined, {}))
 })
 
-test('security: type=http ', assert => {
-  assert.plan(1)
-
+test('security: type=http ', () => {
   const fastifyRoute = {
     schema: {
       query: {},
@@ -49,7 +46,7 @@ test('security: type=http ', assert => {
 
   security(fastifyRoute, securitySchemes, [{ httpAuth: {} }])
 
-  assert.strictSame(fastifyRoute, {
+  assert.deepEqual(fastifyRoute, {
     schema: {
       query: {},
       headers: {
@@ -65,9 +62,7 @@ test('security: type=http ', assert => {
   })
 })
 
-test('security: type=apiKey in=header ', assert => {
-  assert.plan(1)
-
+test('security: type=apiKey in=header ', () => {
   const fastifyRoute = {
     schema: {
       query: {},
@@ -81,7 +76,7 @@ test('security: type=apiKey in=header ', assert => {
 
   security(fastifyRoute, securitySchemes, [{ headerAuth: {} }])
 
-  assert.strictSame(fastifyRoute, {
+  assert.deepEqual(fastifyRoute, {
     schema: {
       query: {},
       headers: {
@@ -97,9 +92,7 @@ test('security: type=apiKey in=header ', assert => {
   })
 })
 
-test('security: type=apiKey in=query ', assert => {
-  assert.plan(1)
-
+test('security: type=apiKey in=query ', () => {
   const fastifyRoute = {
     schema: {
       query: {
@@ -113,7 +106,7 @@ test('security: type=apiKey in=query ', assert => {
 
   security(fastifyRoute, securitySchemes, [{ queryAuth: {} }])
 
-  assert.strictSame(fastifyRoute, {
+  assert.deepEqual(fastifyRoute, {
     schema: {
       headers: {},
       query: {
@@ -129,9 +122,7 @@ test('security: type=apiKey in=query ', assert => {
   })
 })
 
-test('security: type=apiKey in=cookie ', assert => {
-  assert.plan(1)
-
+test('security: type=apiKey in=cookie ', () => {
   const fastifyRoute = {
     schema: {
       query: {},
@@ -145,7 +136,7 @@ test('security: type=apiKey in=cookie ', assert => {
 
   security(fastifyRoute, securitySchemes, [{ cookieAuth: {} }])
 
-  assert.strictSame(fastifyRoute, {
+  assert.deepEqual(fastifyRoute, {
     schema: {
       query: {},
       headers: {
@@ -161,9 +152,7 @@ test('security: type=apiKey in=cookie ', assert => {
   })
 })
 
-test('security: ignore missing security types', assert => {
-  assert.plan(1)
-
+test('security: ignore missing security types', () => {
   const fastifyRoute = {
     schema: {
       query: {},
@@ -173,7 +162,7 @@ test('security: ignore missing security types', assert => {
 
   security(fastifyRoute, securitySchemes, [{ Header: {}, Missing: {} }])
 
-  assert.strictSame(fastifyRoute, {
+  assert.deepEqual(fastifyRoute, {
     schema: {
       query: {},
       headers: {}
@@ -181,9 +170,7 @@ test('security: ignore missing security types', assert => {
   })
 })
 
-test('security: multiple ', assert => {
-  assert.plan(1)
-
+test('security: multiple ', () => {
   const fastifyRoute = {
     schema: {
       query: {
@@ -201,7 +188,7 @@ test('security: multiple ', assert => {
 
   security(fastifyRoute, securitySchemes, [{ httpAuth: {}, headerAuth: {}, queryAuth: {} }])
 
-  assert.strictSame(fastifyRoute, {
+  assert.deepEqual(fastifyRoute, {
     schema: {
       query: {
         type: 'object',
