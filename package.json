@@ -32,5 +32,8 @@
   },
   "dependencies": {
     "fastify-plugin": "^4.5.1"
+  },
+  "devDependencies": {
+    "node-test-github-reporter": "^1.1.3"
   }
 }
