@@ -31,7 +31,7 @@
     "test:ci": "npm run test:cli -- --test-reporter node-test-github-reporter test"
   },
   "dependencies": {
-    "fastify-plugin": "^4.5.1"
+    "fastify-plugin": "^5.0.0"
   },
   "devDependencies": {
     "node-test-github-reporter": "^1.1.3"
