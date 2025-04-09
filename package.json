@@ -1,6 +1,6 @@
 {
-  "version": "0.0.0-semantically-released",
-  "name": "oas-fastify",
+  "version": "5.0.0",
+  "name": "@aurora-interactive/oas-fastify",
   "description": "OAS 3.x to Fastify routes automation",
   "author": "Ahmad Nassri <email@ahmadnassri.com> (https://www.ahmadnassri.com)",
   "homepage": "https://github.com/ahmadnassri/node-oas-fastify",
@@ -31,7 +31,7 @@
     "test:ci": "npm run test:cli -- --test-reporter node-test-github-reporter test"
   },
   "dependencies": {
-    "fastify-plugin": "^4.5.1"
+    "fastify-plugin": "^5.0.0"
   },
   "devDependencies": {
     "node-test-github-reporter": "^1.1.3"
